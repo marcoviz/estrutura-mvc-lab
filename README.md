@@ -68,22 +68,94 @@ A versão está em `.agents/skills/refactor-arch/` dentro de cada um dos três p
 
 ## Resultados
 
-- Projeto 1: 4 arquivos/780 linhas, 19 endpoints; 3 CRITICAL, 2 HIGH, 3 MEDIUM, 3 LOW.
-- Projeto 2: 3 arquivos/180 linhas, 3 endpoints; 2 CRITICAL, 2 HIGH, 4 MEDIUM, 2 LOW.
-- Projeto 3: 15 arquivos/1158 linhas, 22 endpoints; 1 CRITICAL, 2 HIGH, 4 MEDIUM, 3 LOW.
+| Projeto | Escopo original | CRITICAL | HIGH | MEDIUM | LOW | Endpoints |
+|---|---|---:|---:|---:|---:|---:|
+| E-commerce Flask | 4 arquivos / 780 linhas | 3 | 2 | 3 | 3 | 19 |
+| LMS Express | 3 arquivos / 180 linhas | 2 | 2 | 4 | 2 | 3 |
+| Task Manager Flask | 15 arquivos / 1158 linhas | 1 | 2 | 4 | 3 | 22 |
 
-Os achados e a disposição por ID estão nos relatórios individuais. A reauditoria encontrou e corrigiu três regressões comportamentais: JSON com categoria/status não textual agora retorna 400; senha mantém espaços literais no cadastro/login e rejeita tipos/comprimentos inválidos; criação de categoria sem descrição restaura `description: ""`, e update parcial preserva a descrição existente. As três suítes locais passaram, **15/15 testes** no total (5 por projeto).
+### Estrutura antes e depois
 
-Os arquivos `evidence/http-project-{1,2,3}.json` registram a execução HTTP final após as correções: 20/20 verificações no projeto 1, 3/3 no projeto 2 e 22/22 no projeto 3, sem falhas. O projeto 1 inclui uma verificação adicional além dos 19 pares método/caminho inventariados. Os resumos das execuções estão em `evidence/http-run-project-{1,2,3}.log`. Nenhum commit, publicação, envio à avaliação ou operação GitHub foi realizado.
+As estruturas anteriores se referem à revisão original identificada nos relatórios; as posteriores correspondem ao código deste repositório.
+
+| Projeto | Antes | Depois e responsabilidade |
+|---|---|---|
+| `code-smells-project` | `app.py`, `controllers.py`, `models.py`, `database.py`: SQL, validação, regras e HTTP misturados | `app.py` compõe a aplicação; `config.py` lê ambiente; `database.py` gerencia conexão; `models/` persiste; `services/` coordena pedidos e usuários; `controllers/` concentra fluxo; `views/` trata HTTP; `domain/` valida e define erros |
+| `ecommerce-api-legacy` | `src/app.js`, `src/AppManager.js`, `src/utils.js`: God Class com schema, rotas, pagamentos e relatórios | `src/server.js` inicia; `src/app.js` compõe; `src/config.js` configura; `src/models/` encapsula SQLite; `src/services/checkout.js` coordena transação e gateway simulado; `src/controllers/` coordena HTTP; `src/views/` declara rotas; `src/domain/` valida/deriva senhas/trata erros |
+| `task-manager-api` | `app.py`, `database.py`, `seed.py`, `models/`, `routes/`, `services/`, `utils/`: rotas com regras e consultas ORM | Factory/config separadas; `models/` preserva entidades; `repositories/` centraliza consultas e eager loading; `controllers/` coordena casos de uso; `domain/` centraliza regras; `services/` monta relatórios; `views/` apresenta DTOs; `routes/` mantém Blueprints |
+
+### Checklist de validação por projeto
+
+Os 19 itens do enunciado, separados nas três fases e preenchidos com evidências, estão em:
+
+- [Projeto 1 — checklist completo](reports/audit-project-1.md#checklist-de-validação).
+- [Projeto 2 — checklist completo](reports/audit-project-2.md#checklist-de-validação).
+- [Projeto 3 — checklist completo](reports/audit-project-3.md#checklist-de-validação).
+
+A skill adaptou o projeto 1 de módulos nominais para camadas reais, desfez a God Class no projeto 2 e preservou o ORM/Blueprints úteis no projeto 3. Não houve imposição de uma árvore única sobre as duas stacks. Na reauditoria, corrigimos tipos JSON inválidos, preservação literal de senhas e defaults de categoria. As views do projeto 1 agora usam métodos públicos dos controllers, inclusive no fluxo administrativo.
+
+### Validação e evidências
+
+As três suítes passaram novamente: **15 testes, cinco por projeto**. O verificador também confere o seed em bancos temporários: senha obrigatória, criação de uma amostra, recusa da segunda execução, hash verificável e recusa de banco que já contém apenas categoria, sem inserir ou apagar dados.
+
+Os registros HTTP anteriores continuam em [projeto 1](evidence/http-project-1.json), [projeto 2](evidence/http-project-2.json) e [projeto 3](evidence/http-project-3.json), com 20/20, 3/3 e 22/22 verificações. Os respectivos logs `evidence/http-run-project-{1,2,3}.log` preservam a evidência da aplicação rodando.
+
+O smoke ampliado em [scripts/smoke_http.py](scripts/smoke_http.py) verifica, além de status e ausência de segredos, valores persistidos, filtros, totais, estoque, joins, atualização parcial, exclusão e falhas sem efeitos. Os valores esperados derivam das entradas e contratos aprovados; isso não é uma alegação de equivalência byte a byte com todas as respostas do legado, cujos comportamentos inseguros foram alterados conforme os planos.
+
+A execução final ampliada passou com **HTTP real**, bancos descartáveis e processos locais separados:
+
+| Projeto | Requests HTTP | Checks de payload/efeitos | Resultado |
+|---|---:|---:|---|
+| E-commerce Flask | 31/31 | 20/20 | Aprovado |
+| LMS Express | 9/9 | 8/8 | Aprovado |
+| Task Manager Flask | 34/34 | 20/20 | Aprovado |
+
+São **74 requests e 48 checks**, além dos 15 testes e cinco cenários de seed, sem falhas. [Resumo e logs finais](evidence/final-validation/summary.json). O campo `transport` diferencia HTTP real de `flask-test-client`; a execução final registra `http` nos três projetos. A opção `--flask-in-process` existe para ambientes que bloqueiem sockets, mas o Express ainda requer loopback.
+
+O repositório contém a implementação commitada e publicada no GitHub. Submissão à avaliação da Full Cycle é uma ação separada; não foi realizada por este projeto.
 
 ## Como Executar
 
-Pré-requisitos: Codex com suporte a skills, Python compatível com os requirements dos projetos Flask e Node.js para o projeto Express. As dependências e configurações de cada aplicação serão descritas junto à execução da refatoração.
+Pré-requisitos: Python **3.12** (validado em 3.12.14), Node.js **24** (validado em 24.19.0), npm e Codex configurado para usar skills. Cada Flask precisa de seu próprio ambiente virtual, pois os requirements usam versões diferentes. O Node usa SQLite nativo; se não houver binário pronto para seu sistema, a instalação requer as ferramentas de compilação da plataforma.
 
-No diretório de cada projeto, abra Codex e invoque a skill:
+Na raiz do repositório, prepare os ambientes:
+
+```bash
+python3 -m venv code-smells-project/.venv
+code-smells-project/.venv/bin/python -m pip install -r code-smells-project/requirements.txt
+python3 -m venv task-manager-api/.venv
+task-manager-api/.venv/bin/python -m pip install -r task-manager-api/requirements.txt
+npm --prefix ecommerce-api-legacy ci
+```
+
+Os guias de cada aplicação mostram configuração, boot e teste individual: [E-commerce Flask](code-smells-project/README.md), [LMS Express](ecommerce-api-legacy/README.md) e [Task Manager](task-manager-api/README.md). As variáveis dos `.env.example` são referências; os comandos abaixo usam variáveis exportadas no shell. O seed do Task Manager é **opcional**, exige `DEMO_PASSWORD` e nunca deve ser usado para apagar/reinicializar um banco existente.
+
+Para executar os testes isoladamente, na raiz:
+
+```bash
+cd code-smells-project
+.venv/bin/python -m unittest discover -s tests -v
+cd ../ecommerce-api-legacy
+npm test
+cd ../task-manager-api
+.venv/bin/python -m unittest discover -s tests -v
+cd ..
+```
+
+Para repetir toda a validação, sem iniciar as aplicações manualmente:
+
+```bash
+python3 scripts/verify_local.py
+```
+
+O verificador executa as três suítes, testa o seed, inicia cada servidor em porta local disponível, cria bancos descartáveis, roda os contratos HTTP e encerra os processos. O relatório vai para `evidence/final-validation/`; use `--output-dir /tmp/mvc-validation` para gravar fora do checkout. Os parâmetros `--python-project-1`, `--python-project-3` e `--node` permitem indicar runtimes já instalados. Não há API externa, pagamento real ou envio de email nesse fluxo. Não aponte o smoke avulso para um banco de trabalho: ele cria/exclui fixtures e chama o reset administrativo autenticado do projeto 1.
+
+### Invocar a skill
+
+No diretório de cada um dos três projetos, abra Codex e invoque:
 
 ```text
 $refactor-arch Audite este projeto e apresente o relatório antes de refatorar.
 ```
 
-A skill também pode ser citada por seu arquivo `SKILL.md`. Não é necessário chamar `claude /refactor-arch`; esse era apenas o exemplo do curso. Em uma nova aplicação, revise a fase 2 e confirme o plano concreto antes de executar a fase 3, que inicia a aplicação com banco descartável e verifica os endpoints inventariados.
+A skill pode também ser citada pelo seu `.agents/skills/refactor-arch/SKILL.md`. Revise o relatório da fase 2 e confirme o plano concreto antes da fase 3. Na execução documentada neste repositório, essa autorização já foi recebida e registrada nos três relatórios.

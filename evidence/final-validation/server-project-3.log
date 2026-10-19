@@ -1,0 +1,40 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:55581
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [19/Oct/2026 18:56:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "[35m[1mPOST /categories HTTP/1.1[0m" 201 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /categories HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "[35m[1mPOST /users HTTP/1.1[0m" 201 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /users/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "[35m[1mPOST /tasks HTTP/1.1[0m" 201 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks/search?q=Contrato&priority=2 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks/stats HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "PUT /tasks/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /users/1/tasks HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks/stats HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /reports/summary HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /reports/user/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "PUT /users/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /users/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "PUT /categories/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /categories HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "[31m[1mPOST /tasks HTTP/1.1[0m" 400 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks/stats HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "DELETE /tasks/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "[33mGET /tasks/1 HTTP/1.1[0m" 404 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "[35m[1mPOST /tasks HTTP/1.1[0m" 201 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "DELETE /categories/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "DELETE /users/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "[33mGET /users/1 HTTP/1.1[0m" 404 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "[33mGET /tasks/1 HTTP/1.1[0m" 404 -
+127.0.0.1 - - [19/Oct/2026 18:56:27] "GET /tasks HTTP/1.1" 200 -

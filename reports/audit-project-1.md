@@ -6,6 +6,8 @@ Revisão de origem: `6d1ce6248c3e956801010a89d8bdaab48029bf30`. Inspeção reali
 
 ## Fase 1 — Análise
 
+Registro da análise anterior à implementação; as afirmações de execução pendente abaixo descrevem aquele momento. Os resultados posteriores estão na Fase 3 e no checklist final.
+
 - Stack: Python / Flask 3.1.1 / flask-cors 5.0.1 / sqlite3 padrão.
 - Domínio: API de e-commerce: produtos, usuários, pedidos e relatórios.
 - Arquitetura atual: Separação nominal em app/controllers/models; models mistura quatro domínios e regras, controllers contêm validação e notificações, app inclui SQL administrativo.
@@ -170,3 +172,43 @@ Refatoração aplicada nas camadas `domain`, `models`, `services`, `controllers`
 Uma revisão comportamental posterior detectou que categoria JSON não textual e status de pedido como lista/objeto levantavam `TypeError` e viravam 500. A validação agora confirma `str` antes de consultar os conjuntos permitidos. Também detectou que `text()` removia espaços de senhas; cadastro e login agora validam tipo e comprimento sem normalizar o segredo, preservando compatibilidade com senhas legadas que contêm espaços.
 
 Validação após a reauditoria: `python -m unittest tests.test_architecture` no venv do projeto, **5/5 testes aprovados**. A execução HTTP final registrou **20/20 verificações aprovadas, 0 falhas**, cobrindo os 19 pares método/caminho inventariados e uma verificação adicional. Evidências: [`evidence/http-project-1.json`](../evidence/http-project-1.json) e [`evidence/http-run-project-1.log`](../evidence/http-run-project-1.log).
+
+## Comparação explícita da estrutura
+
+| Antes, na revisão de origem | Depois, no código entregue |
+|---|---|
+| Quatro módulos com nomes MVC, mas SQL, regras, validação, notificações e HTTP misturados. | Factory/config, Models de persistência, Services de pedidos/usuários, Controllers de coordenação, Views HTTP e domínio compartilhado. |
+
+## Checklist de Validação
+
+Checklist literal do enunciado, preenchido após a revisão de 19/10/2026. Os números de arquivos/linhas descrevem o escopo original, não a quantidade maior de módulos produzida pela refatoração. A fase 2 e o checkpoint acima preservam o histórico do plano aprovado.
+
+### Fase 1 — Análise
+
+- [x] Linguagem detectada corretamente — Python; arquivos inventariados na Fase 1.
+- [x] Framework detectado corretamente — Flask 3.1.1; manifests e imports conferidos.
+- [x] Domínio da aplicação descrito corretamente — e-commerce: produtos, usuários, pedidos e vendas.
+- [x] Número de arquivos analisados condiz com a realidade — 4 arquivos / 780 linhas; lista nominal na Fase 1 e revisão original indicada no início do relatório.
+
+### Fase 2 — Auditoria
+
+- [x] Relatório segue o template definido nos arquivos de referência — Fases 1/2, resumo, evidência, impacto, recomendação, catálogo/playbook, aceite e checkpoint, conforme [audit-template.md](../code-smells-project/.agents/skills/refactor-arch/references/audit-template.md).
+- [x] Cada finding tem arquivo e linhas exatos — os findings acima ligam o arquivo e intervalo na revisão original.
+- [x] Findings ordenados por severidade (CRITICAL → LOW) — ordem e resumo da Fase 2.
+- [x] Mínimo de 5 findings identificados — 11 findings (3 CRITICAL, 2 HIGH, 3 MEDIUM, 3 LOW).
+- [x] Detecção de APIs deprecated incluída (se aplicável) — Verificação registrada em “APIs obsoletas”: nenhum caso confirmado nesse escopo; não se inventou ocorrência para cumprir o item.
+- [x] Skill pausa e pede confirmação antes da Fase 3 — [SKILL.md](../code-smells-project/.agents/skills/refactor-arch/SKILL.md) exige o checkpoint; a autorização “Aprovo os três planos; pode refatorar” está registrada acima antes do resultado.
+
+### Fase 3 — Refatoração
+
+- [x] Estrutura de diretórios segue padrão MVC — comparação antes/depois acima e camadas descritas na Fase 3.
+- [x] Configuração extraída para módulo de config (sem hardcoded) — [config.py](../code-smells-project/config.py) lê ambiente; defaults locais são explícitos, credenciais reais não estão no código.
+- [x] Models criados para abstrair dados — `models/products.py, models/users.py, models/orders.py, models/admin.py`.
+- [x] Views/Routes separadas para visualização ou roteamento — `views/routes.py e views/admin.py`.
+- [x] Controllers concentram o fluxo da aplicação — controllers/store.py e controllers/admin.py; as views usam métodos públicos, sem acessar Models/Services por atributos.
+- [x] Error handling centralizado — domain/errors.py e error handlers de app.py.
+- [x] Entry point claro — `app.py / create_app()`; comandos no [README do projeto](../code-smells-project/README.md).
+- [x] Aplicação inicia sem erros — servidor real iniciado pelo verificador em porta local e banco temporário; [log de boot/requests](../evidence/final-validation/server-project-1.log).
+- [x] Endpoints originais respondem corretamente — **19 pares método/caminho cobertos, 31/31 requests e 20/20 checks de payload/efeitos aprovados**, com as mudanças de segurança do plano; [resultado HTTP](../evidence/final-validation/http-project-1.json) e [log](../evidence/final-validation/http-run-project-1.log).
+
+Validação adicional: [cinco testes locais aprovados](../evidence/final-validation/unit-project-1.log). Todos os testes do repositório totalizam 15; o [resumo reproduzível](../evidence/final-validation/summary.json) também registra cinco verificações do seed e o HTTP dos três projetos. O verificador usa somente bancos descartáveis, gateway simulado e serviços locais.

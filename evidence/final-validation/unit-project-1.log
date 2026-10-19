@@ -1,0 +1,11 @@
+test_order_list_uses_two_queries (test_architecture.StoreTests.test_order_list_uses_two_queries) ... ok
+test_order_rollback_and_aggregate_stock (test_architecture.StoreTests.test_order_rollback_and_aggregate_stock) ... [2026-10-19 18:56:20,468] ERROR in app: Unhandled request error: IntegrityError
+ok
+test_password_preserves_whitespace_and_rejects_non_text (test_architecture.StoreTests.test_password_preserves_whitespace_and_rejects_non_text) ... ok
+test_user_password_and_sql_literals (test_architecture.StoreTests.test_user_password_and_sql_literals) ... ok
+test_validation_and_admin_boundary (test_architecture.StoreTests.test_validation_and_admin_boundary) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.368s
+
+OK

@@ -8,6 +8,27 @@ class StoreController:
         self.products, self.users, self.orders = products, users, orders
         self.user_service, self.order_service = user_service, order_service
 
+    def list_products(self):
+        return self.products.list()
+
+    def list_users(self):
+        return self.users.list()
+
+    def create_user(self, data):
+        return self.user_service.create(data)
+
+    def login(self, data):
+        return self.user_service.login(data)
+
+    def create_order(self, data):
+        return self.order_service.create(data)
+
+    def list_orders(self, user_id=None):
+        return self.orders.list(user_id)
+
+    def sales_report(self):
+        return self.order_service.report()
+
     def product(self, product_id):
         product = self.products.get(product_id)
         if product is None: raise DomainError("Produto não encontrado", 404)

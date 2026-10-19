@@ -1,0 +1,13 @@
+✔ salted KDF verifies without deterministic or reversible password storage (306.535792ms)
+✔ input validates types before payment and SQL (0.425208ms)
+✔ failure after enrollment rolls back user, enrollment, payment and audit (68.498125ms)
+✔ serialized concurrent checkout commits complete units and report executes one query (60.740708ms)
+✔ denied payment does not persist user and delete removes dependent rows (191.583958ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 919.429625

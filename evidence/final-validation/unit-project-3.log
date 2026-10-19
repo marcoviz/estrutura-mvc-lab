@@ -1,0 +1,10 @@
+test_bound_queries_and_shared_overdue_rule (test_architecture.ArchitectureTest.test_bound_queries_and_shared_overdue_rule) ... ok
+test_category_create_defaults_description_and_partial_update_preserves_it (test_architecture.ArchitectureTest.test_category_create_defaults_description_and_partial_update_preserves_it) ... ok
+test_category_delete_detaches_and_user_delete_removes_tasks (test_architecture.ArchitectureTest.test_category_delete_detaches_and_user_delete_removes_tasks) ... ok
+test_password_dto_and_legacy_login_upgrade (test_architecture.ArchitectureTest.test_password_dto_and_legacy_login_upgrade) ... ok
+test_validation_and_failed_write_leave_no_partial_state (test_architecture.ArchitectureTest.test_validation_and_failed_write_leave_no_partial_state) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.573s
+
+OK

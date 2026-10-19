@@ -1,0 +1,588 @@
+{
+  "project": 1,
+  "refactored": true,
+  "transport": "flask-test-client",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "endpoints",
+        "mensagem",
+        "versao"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "counts",
+        "database",
+        "status",
+        "versao"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/produtos",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/produtos/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/busca?q=Atualizado&preco_min=29&preco_max=31",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso",
+        "total"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/usuarios",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/relatorios/vendas",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/pedidos",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/pedidos",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/pedidos/usuario/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/pedidos/1/status",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/pedidos/usuario/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/relatorios/vendas",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/pedidos",
+      "status": 400,
+      "expected": 400,
+      "shape": [
+        "erro",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/relatorios/vendas",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/admin/query",
+      "status": 401,
+      "expected": 401,
+      "shape": [
+        "erro",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/admin/query",
+      "status": 400,
+      "expected": 400,
+      "shape": [
+        "erro",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/produtos",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/produtos/2",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/2",
+      "status": 404,
+      "expected": 404,
+      "shape": [
+        "erro",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/admin/query",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/admin/reset-db",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "counts",
+        "database",
+        "status",
+        "versao"
+      ],
+      "passed": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "index contract",
+      "actual": {
+        "versao": "1.0.0"
+      },
+      "expected": {
+        "versao": "1.0.0"
+      },
+      "passed": true
+    },
+    {
+      "name": "product persisted",
+      "actual": {
+        "nome": "Produto Teste",
+        "descricao": "Contrato",
+        "preco": 25.5,
+        "estoque": 10,
+        "categoria": "geral"
+      },
+      "expected": {
+        "nome": "Produto Teste",
+        "descricao": "Contrato",
+        "preco": 25.5,
+        "estoque": 10,
+        "categoria": "geral"
+      },
+      "passed": true
+    },
+    {
+      "name": "product update persisted",
+      "actual": {
+        "nome": "Produto Atualizado",
+        "descricao": "Contrato",
+        "preco": 30.0,
+        "estoque": 10,
+        "categoria": "geral"
+      },
+      "expected": {
+        "nome": "Produto Atualizado",
+        "descricao": "Contrato",
+        "preco": 30,
+        "estoque": 10,
+        "categoria": "geral"
+      },
+      "passed": true
+    },
+    {
+      "name": "search finds updated product",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "search count matches rows",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "user appears in list",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "public user contract",
+      "actual": {
+        "id": 1,
+        "nome": "Pessoa Teste",
+        "email": "contrato@example.test",
+        "tipo": "cliente"
+      },
+      "expected": {
+        "id": 1,
+        "nome": "Pessoa Teste",
+        "email": "contrato@example.test",
+        "tipo": "cliente"
+      },
+      "passed": true
+    },
+    {
+      "name": "login user contract",
+      "actual": {
+        "id": 1,
+        "nome": "Pessoa Teste",
+        "email": "contrato@example.test",
+        "tipo": "cliente"
+      },
+      "expected": {
+        "id": 1,
+        "nome": "Pessoa Teste",
+        "email": "contrato@example.test",
+        "tipo": "cliente"
+      },
+      "passed": true
+    },
+    {
+      "name": "order total uses persisted price",
+      "actual": 60.0,
+      "expected": 60,
+      "passed": true
+    },
+    {
+      "name": "order decrements stock",
+      "actual": 8,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "name": "order appears in list",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "order belongs to user",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "order details",
+      "actual": {
+        "usuario_id": 1,
+        "total": 60.0,
+        "status": "pendente"
+      },
+      "expected": {
+        "usuario_id": 1,
+        "total": 60,
+        "status": "pendente"
+      },
+      "passed": true
+    },
+    {
+      "name": "order item contract",
+      "actual": [
+        {
+          "preco_unitario": 30.0,
+          "produto_id": 1,
+          "produto_nome": "Produto Atualizado",
+          "quantidade": 2
+        }
+      ],
+      "expected": [
+        {
+          "produto_id": 1,
+          "produto_nome": "Produto Atualizado",
+          "quantidade": 2,
+          "preco_unitario": 30
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "status update persisted",
+      "actual": "aprovado",
+      "expected": "aprovado",
+      "passed": true
+    },
+    {
+      "name": "sales aggregate effects",
+      "actual": {
+        "total_pedidos": 1,
+        "faturamento_bruto": 60.0,
+        "pedidos_aprovados": 1
+      },
+      "expected": {
+        "total_pedidos": 1,
+        "faturamento_bruto": 60,
+        "pedidos_aprovados": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "rejected order leaves stock",
+      "actual": 8,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "name": "rejected order leaves report",
+      "actual": {
+        "desconto_aplicavel": 0.0,
+        "faturamento_bruto": 60.0,
+        "faturamento_liquido": 60.0,
+        "pedidos_aprovados": 1,
+        "pedidos_cancelados": 0,
+        "pedidos_pendentes": 0,
+        "ticket_medio": 60.0,
+        "total_pedidos": 1
+      },
+      "expected": {
+        "desconto_aplicavel": 0.0,
+        "faturamento_bruto": 60.0,
+        "faturamento_liquido": 60.0,
+        "pedidos_aprovados": 1,
+        "pedidos_cancelados": 0,
+        "pedidos_pendentes": 0,
+        "ticket_medio": 60.0,
+        "total_pedidos": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "create and delete effects",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "reset clears domain tables",
+      "actual": {
+        "pedidos": 0,
+        "produtos": 0,
+        "usuarios": 0
+      },
+      "expected": {
+        "produtos": 0,
+        "usuarios": 0,
+        "pedidos": 0
+      },
+      "passed": true
+    }
+  ],
+  "passed": 31,
+  "failed": 0,
+  "checks_passed": 20,
+  "checks_failed": 0
+}

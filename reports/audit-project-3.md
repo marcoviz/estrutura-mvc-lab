@@ -2,9 +2,11 @@
 
 Estado: **Refatoração e reauditoria concluídas após aprovação; validação final HTTP aprovada.**
 
-Revisão de origem: `6d1ce6248c3e956801010a89d8bdaab48029`. Inspeção realizada por Codex, com a skill `refactor-arch`; não constitui revisão humana simulada. A análise inicial anterior à criação da skill serviu de baseline, e a execução das fases 1/2 confrontou os achados com o catálogo. O código permaneceu intacto até a aprovação do plano, quando a fase 3 autorizada iniciou a refatoração documentada abaixo.
+Revisão de origem: `6d1ce6248c3e956801010a89d8bdaab48029bf30`. Inspeção realizada por Codex, com a skill `refactor-arch`; não constitui revisão humana simulada. A análise inicial anterior à criação da skill serviu de baseline, e a execução das fases 1/2 confrontou os achados com o catálogo. O código permaneceu intacto até a aprovação do plano, quando a fase 3 autorizada iniciou a refatoração documentada abaixo.
 
 ## Fase 1 — Análise
+
+Registro da análise anterior à implementação; as afirmações de execução pendente abaixo descrevem aquele momento. Os resultados posteriores estão na Fase 3 e no checklist final.
 
 - Stack: Python / Flask 3.0.0 / Flask-SQLAlchemy 3.1.1 / SQLite.
 - Domínio: Task Manager: tarefas, usuários, categorias, relatórios e login.
@@ -164,3 +166,45 @@ Refatoração aplicada nas camadas `domain`, `models`, `repositories`, `services
 Uma revisão comportamental detectou que criação de categoria sem `description` não preservava o default público vazio. `category_data` agora retorna `description: ""` em criação; atualização parcial continua incluindo somente os campos enviados. Testes verificam o default e a preservação durante update.
 
 Validação após a reauditoria: `python -m unittest tests.test_architecture` no venv do projeto, **5/5 testes aprovados**. A execução HTTP final registrou **22/22 verificações aprovadas, 0 falhas**, cobrindo os 22 pares método/caminho inventariados. Evidências: [`evidence/http-project-3.json`](../evidence/http-project-3.json) e [`evidence/http-run-project-3.log`](../evidence/http-run-project-3.log).
+
+## Comparação explícita da estrutura
+
+| Antes, na revisão de origem | Depois, no código entregue |
+|---|---|
+| Models e Blueprints existentes, porém rotas acumulavam validação, regras, queries, serialização e envio de notificações. | Models/Blueprints preservados, factory/config separadas, Repository com carregamento em lote, Controllers, regras e presenters compartilhados. |
+
+## Checklist de Validação
+
+Checklist literal do enunciado, preenchido após a revisão de 19/10/2026. Os números de arquivos/linhas descrevem o escopo original, não a quantidade maior de módulos produzida pela refatoração. A fase 2 e o checkpoint acima preservam o histórico do plano aprovado.
+
+### Fase 1 — Análise
+
+- [x] Linguagem detectada corretamente — Python; arquivos inventariados na Fase 1.
+- [x] Framework detectado corretamente — Flask 3.0.0 / Flask-SQLAlchemy 3.1.1; manifests e imports conferidos.
+- [x] Domínio da aplicação descrito corretamente — tarefas, usuários, categorias e relatórios.
+- [x] Número de arquivos analisados condiz com a realidade — 15 arquivos / 1158 linhas; lista nominal na Fase 1 e revisão original indicada no início do relatório.
+
+### Fase 2 — Auditoria
+
+- [x] Relatório segue o template definido nos arquivos de referência — Fases 1/2, resumo, evidência, impacto, recomendação, catálogo/playbook, aceite e checkpoint, conforme [audit-template.md](../task-manager-api/.agents/skills/refactor-arch/references/audit-template.md).
+- [x] Cada finding tem arquivo e linhas exatos — os findings acima ligam o arquivo e intervalo na revisão original.
+- [x] Findings ordenados por severidade (CRITICAL → LOW) — ordem e resumo da Fase 2.
+- [x] Mínimo de 5 findings identificados — 10 findings (1 CRITICAL, 2 HIGH, 4 MEDIUM, 3 LOW).
+- [x] Detecção de APIs deprecated incluída (se aplicável) — P3-06 e “APIs obsoletas confirmadas” identificam Query.get e datetime.utcnow com fontes; repositories usam Session.get e domain/rules.py usa relógio UTC atualizado.
+- [x] Skill pausa e pede confirmação antes da Fase 3 — [SKILL.md](../task-manager-api/.agents/skills/refactor-arch/SKILL.md) exige o checkpoint; a autorização “Aprovo os três planos; pode refatorar” está registrada acima antes do resultado.
+
+### Fase 3 — Refatoração
+
+- [x] Estrutura de diretórios segue padrão MVC — comparação antes/depois acima e camadas descritas na Fase 3.
+- [x] Configuração extraída para módulo de config (sem hardcoded) — [config.py](../task-manager-api/config.py) lê ambiente; defaults locais são explícitos, credenciais reais não estão no código.
+- [x] Models criados para abstrair dados — `models/user.py, models/task.py, models/category.py e repositories/store.py`.
+- [x] Views/Routes separadas para visualização ou roteamento — `routes/ com Blueprints; views/presenters.py monta os DTOs`.
+- [x] Controllers concentram o fluxo da aplicação — controllers/tasks.py, controllers/users.py e controllers/reports.py coordenam os casos de uso; regras/relatórios ficam em domain/ e services/.
+- [x] Error handling centralizado — domain/errors.py e error boundary com rollback em app.py.
+- [x] Entry point claro — `app.py / create_app()`; comandos no [README do projeto](../task-manager-api/README.md).
+- [x] Aplicação inicia sem erros — servidor real iniciado pelo verificador em porta local e banco temporário; [log de boot/requests](../evidence/final-validation/server-project-3.log).
+- [x] Endpoints originais respondem corretamente — **22 pares método/caminho cobertos, 34/34 requests e 20/20 checks de payload/efeitos aprovados**, com as mudanças de segurança do plano; [resultado HTTP](../evidence/final-validation/http-project-3.json) e [log](../evidence/final-validation/http-run-project-3.log).
+
+Validação adicional: [cinco testes locais aprovados](../evidence/final-validation/unit-project-3.log). Todos os testes do repositório totalizam 15; o [resumo reproduzível](../evidence/final-validation/summary.json) também registra cinco verificações do seed e o HTTP dos três projetos. O verificador usa somente bancos descartáveis, gateway simulado e serviços locais.
+
+O seed é opcional e agora recusa qualquer banco que já contenha usuário, categoria ou tarefa. A variável `DEMO_PASSWORD`, a localização do SQLite e o procedimento de reprodução estão no README do projeto; os logs `seed-*.log` comprovam criação e recusas sem exclusão de dados.

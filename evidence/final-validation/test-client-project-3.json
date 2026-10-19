@@ -1,0 +1,685 @@
+{
+  "project": 3,
+  "refactored": true,
+  "transport": "flask-test-client",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message",
+        "version"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "status",
+        "timestamp"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/categories",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/categories",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/users",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role",
+        "tasks"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message",
+        "token",
+        "user"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/tasks",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/search?q=Contrato&priority=2",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/stats",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "cancelled",
+        "completion_rate",
+        "done",
+        "in_progress",
+        "overdue",
+        "pending",
+        "total"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/tasks/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/users/1/tasks",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/stats",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "cancelled",
+        "completion_rate",
+        "done",
+        "in_progress",
+        "overdue",
+        "pending",
+        "total"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/reports/summary",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "generated_at",
+        "overdue",
+        "overview",
+        "recent_activity",
+        "tasks_by_priority",
+        "tasks_by_status",
+        "user_productivity"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/reports/user/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "statistics",
+        "user"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role",
+        "tasks"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/categories/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/categories",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/tasks",
+      "status": 400,
+      "expected": 400,
+      "shape": [
+        "error"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/stats",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "cancelled",
+        "completion_rate",
+        "done",
+        "in_progress",
+        "overdue",
+        "pending",
+        "total"
+      ],
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/tasks/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/1",
+      "status": 404,
+      "expected": 404,
+      "shape": [
+        "error"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/tasks",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/categories/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/users/1",
+      "status": 404,
+      "expected": 404,
+      "shape": [
+        "error"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/1",
+      "status": 404,
+      "expected": 404,
+      "shape": [
+        "error"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "index contract",
+      "actual": {
+        "message": "Task Manager API",
+        "version": "1.0"
+      },
+      "expected": {
+        "message": "Task Manager API",
+        "version": "1.0"
+      },
+      "passed": true
+    },
+    {
+      "name": "health contract",
+      "actual": {
+        "status": "ok"
+      },
+      "expected": {
+        "status": "ok"
+      },
+      "passed": true
+    },
+    {
+      "name": "category appears in list",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "user appears in list",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "user persisted",
+      "actual": {
+        "name": "Pessoa Teste",
+        "email": "contrato@example.test",
+        "role": "user"
+      },
+      "expected": {
+        "name": "Pessoa Teste",
+        "email": "contrato@example.test",
+        "role": "user"
+      },
+      "passed": true
+    },
+    {
+      "name": "login user contract",
+      "actual": {
+        "name": "Pessoa Teste",
+        "email": "contrato@example.test",
+        "role": "user"
+      },
+      "expected": {
+        "name": "Pessoa Teste",
+        "email": "contrato@example.test",
+        "role": "user"
+      },
+      "passed": true
+    },
+    {
+      "name": "task persisted",
+      "actual": {
+        "title": "Contrato de tarefa",
+        "description": "Teste",
+        "priority": 2,
+        "user_id": 1,
+        "category_id": 1,
+        "tags": [
+          "teste"
+        ]
+      },
+      "expected": {
+        "title": "Contrato de tarefa",
+        "description": "Teste",
+        "priority": 2,
+        "user_id": 1,
+        "category_id": 1,
+        "tags": [
+          "teste"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "due date preserved",
+      "actual": "2030-01-01",
+      "expected": "2030-01-01",
+      "passed": true
+    },
+    {
+      "name": "task joins contract",
+      "actual": {
+        "user_name": "Pessoa Teste",
+        "category_name": "Categoria Contrato"
+      },
+      "expected": {
+        "user_name": "Pessoa Teste",
+        "category_name": "Categoria Contrato"
+      },
+      "passed": true
+    },
+    {
+      "name": "search matches task and priority",
+      "actual": [
+        1
+      ],
+      "expected": [
+        1
+      ],
+      "passed": true
+    },
+    {
+      "name": "task update persisted",
+      "actual": {
+        "title": "Contrato atualizado",
+        "status": "done",
+        "priority": 3,
+        "description": "Teste",
+        "tags": [
+          "teste"
+        ]
+      },
+      "expected": {
+        "title": "Contrato atualizado",
+        "status": "done",
+        "priority": 3,
+        "description": "Teste",
+        "tags": [
+          "teste"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "user task contract",
+      "actual": [
+        1
+      ],
+      "expected": [
+        1
+      ],
+      "passed": true
+    },
+    {
+      "name": "stats reflect completed task",
+      "actual": {
+        "total": 1,
+        "done": 1
+      },
+      "expected": {
+        "total": 1,
+        "done": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "summary status matches stats",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "user report matches task",
+      "actual": {
+        "total_tasks": 1,
+        "done": 1,
+        "completion_rate": 100.0
+      },
+      "expected": {
+        "total_tasks": 1,
+        "done": 1,
+        "completion_rate": 100
+      },
+      "passed": true
+    },
+    {
+      "name": "partial user update preserves email",
+      "actual": {
+        "name": "Pessoa Atualizada",
+        "email": "contrato@example.test"
+      },
+      "expected": {
+        "name": "Pessoa Atualizada",
+        "email": "contrato@example.test"
+      },
+      "passed": true
+    },
+    {
+      "name": "partial category update preserves fields",
+      "actual": {
+        "name": "Categoria Atualizada",
+        "description": "Teste",
+        "color": "#123456",
+        "task_count": 1
+      },
+      "expected": {
+        "name": "Categoria Atualizada",
+        "description": "Teste",
+        "color": "#123456",
+        "task_count": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "invalid task leaves total unchanged",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "category deletion detaches tasks",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "user deletion leaves no owned tasks",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    }
+  ],
+  "passed": 34,
+  "failed": 0,
+  "checks_passed": 20,
+  "checks_failed": 0
+}

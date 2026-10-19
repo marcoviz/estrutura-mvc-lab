@@ -8,7 +8,7 @@ def build_routes(controller):
     def index():
         return {"mensagem": "Bem-vindo à API da Loja", "versao": "1.0.0", "endpoints": {"produtos":"/produtos", "usuarios":"/usuarios", "pedidos":"/pedidos", "login":"/login", "relatorios":"/relatorios/vendas", "health":"/health"}}
     @routes.get("/produtos")
-    def products(): return ok(controller().products.list())
+    def products(): return ok(controller().list_products())
     @routes.get("/produtos/busca")
     def search():
         result = controller().search_products(request.args)
@@ -26,23 +26,23 @@ def build_routes(controller):
         controller().delete_product(product_id)
         return {"sucesso": True, "mensagem": "Produto deletado"}
     @routes.get("/usuarios")
-    def users(): return ok(controller().users.list())
+    def users(): return ok(controller().list_users())
     @routes.get("/usuarios/<int:user_id>")
     def user(user_id): return ok(controller().user(user_id))
     @routes.post("/usuarios")
-    def create_user(): return ok({"id": controller().user_service.create(request.get_json())}), 201
+    def create_user(): return ok({"id": controller().create_user(request.get_json())}), 201
     @routes.post("/login")
-    def login(): return ok(controller().user_service.login(request.get_json()), mensagem="Login OK")
+    def login(): return ok(controller().login(request.get_json()), mensagem="Login OK")
     @routes.post("/pedidos")
-    def create_order(): return ok(controller().order_service.create(request.get_json()), mensagem="Pedido criado com sucesso"), 201
+    def create_order(): return ok(controller().create_order(request.get_json()), mensagem="Pedido criado com sucesso"), 201
     @routes.get("/pedidos")
-    def orders(): return ok(controller().orders.list())
+    def orders(): return ok(controller().list_orders())
     @routes.get("/pedidos/usuario/<int:user_id>")
-    def user_orders(user_id): return ok(controller().orders.list(user_id))
+    def user_orders(user_id): return ok(controller().list_orders(user_id))
     @routes.put("/pedidos/<int:order_id>/status")
     def update_status(order_id):
         controller().update_order(order_id, request.get_json())
         return {"sucesso": True, "mensagem": "Status atualizado"}
     @routes.get("/relatorios/vendas")
-    def report(): return ok(controller().order_service.report())
+    def report(): return ok(controller().sales_report())
     return routes

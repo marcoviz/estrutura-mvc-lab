@@ -2,9 +2,11 @@
 
 Estado: **Refatoração e reauditoria concluídas após aprovação; validação final HTTP aprovada.**
 
-Revisão de origem: `6d1ce6248c3e956801010a89d8bdaab48029`. Inspeção realizada por Codex, com a skill `refactor-arch`; não constitui revisão humana simulada. A análise inicial anterior à criação da skill serviu de baseline, e a execução das fases 1/2 confrontou os achados com o catálogo. O código permaneceu intacto até a aprovação do plano, quando a fase 3 autorizada iniciou a refatoração documentada abaixo.
+Revisão de origem: `6d1ce6248c3e956801010a89d8bdaab48029bf30`. Inspeção realizada por Codex, com a skill `refactor-arch`; não constitui revisão humana simulada. A análise inicial anterior à criação da skill serviu de baseline, e a execução das fases 1/2 confrontou os achados com o catálogo. O código permaneceu intacto até a aprovação do plano, quando a fase 3 autorizada iniciou a refatoração documentada abaixo.
 
 ## Fase 1 — Análise
+
+Registro da análise anterior à implementação; as afirmações de execução pendente abaixo descrevem aquele momento. Os resultados posteriores estão na Fase 3 e no checklist final.
 
 - Stack: JavaScript CommonJS / Express / sqlite3; versões exatas verificadas no package-lock.
 - Domínio: LMS: checkout, matrícula, pagamento simulado e relatório financeiro.
@@ -144,3 +146,43 @@ A skill exige: “apresente o relatório concreto e o plano, então pause e peç
 Refatoração aplicada em `config`, `models`, `services`, `controllers`, `views` e `domain`. A reauditoria conferiu os dez achados: P2-01 responsabilidades foram separadas; P2-02 cartão e chave saíram de logs/configuração fixa; P2-03 senhas usam scrypt; P2-04 checkout usa transação; P2-05 relatório usa consulta agrupada; P2-06 erros assíncronos têm tratamento HTTP; P2-07 payloads validam tipos; P2-08 exclusão remove relações na mesma transação; P2-09 nomes abreviados foram substituídos; P2-10 faturamento global morto foi removido.
 
 Validação final HTTP: **3/3 endpoints aprovados, 0 falhas**. Evidências: [`evidence/http-project-2.json`](../evidence/http-project-2.json) e [`evidence/http-run-project-2.log`](../evidence/http-run-project-2.log). A suíte local passou **5/5 testes**.
+
+## Comparação explícita da estrutura
+
+| Antes, na revisão de origem | Depois, no código entregue |
+|---|---|
+| AppManager concentrava banco/seeds, rotas, checkout, SQL e relatórios; utils misturava configuração e hash. | Server/composição/config, Database/Repository, CheckoutService/gateway simulado, Controller, Routes e domínio de validação/senhas/erros. |
+
+## Checklist de Validação
+
+Checklist literal do enunciado, preenchido após a revisão de 19/10/2026. Os números de arquivos/linhas descrevem o escopo original, não a quantidade maior de módulos produzida pela refatoração. A fase 2 e o checkpoint acima preservam o histórico do plano aprovado.
+
+### Fase 1 — Análise
+
+- [x] Linguagem detectada corretamente — JavaScript (CommonJS); arquivos inventariados na Fase 1.
+- [x] Framework detectado corretamente — Express 4.22.1, confirmado no lock; manifests e imports conferidos.
+- [x] Domínio da aplicação descrito corretamente — LMS: checkout, matrícula, pagamento simulado e relatório financeiro.
+- [x] Número de arquivos analisados condiz com a realidade — 3 arquivos / 180 linhas; lista nominal na Fase 1 e revisão original indicada no início do relatório.
+
+### Fase 2 — Auditoria
+
+- [x] Relatório segue o template definido nos arquivos de referência — Fases 1/2, resumo, evidência, impacto, recomendação, catálogo/playbook, aceite e checkpoint, conforme [audit-template.md](../ecommerce-api-legacy/.agents/skills/refactor-arch/references/audit-template.md).
+- [x] Cada finding tem arquivo e linhas exatos — os findings acima ligam o arquivo e intervalo na revisão original.
+- [x] Findings ordenados por severidade (CRITICAL → LOW) — ordem e resumo da Fase 2.
+- [x] Mínimo de 5 findings identificados — 10 findings (2 CRITICAL, 2 HIGH, 4 MEDIUM, 2 LOW).
+- [x] Detecção de APIs deprecated incluída (se aplicável) — Verificação registrada em “APIs obsoletas”: nenhum caso confirmado; callbacks não foram classificados como deprecated apenas por estilo.
+- [x] Skill pausa e pede confirmação antes da Fase 3 — [SKILL.md](../ecommerce-api-legacy/.agents/skills/refactor-arch/SKILL.md) exige o checkpoint; a autorização “Aprovo os três planos; pode refatorar” está registrada acima antes do resultado.
+
+### Fase 3 — Refatoração
+
+- [x] Estrutura de diretórios segue padrão MVC — comparação antes/depois acima e camadas descritas na Fase 3.
+- [x] Configuração extraída para módulo de config (sem hardcoded) — [src/config.js](../ecommerce-api-legacy/src/config.js) lê ambiente; defaults locais são explícitos, credenciais reais não estão no código.
+- [x] Models criados para abstrair dados — `src/models/database.js e src/models/lms-repository.js`.
+- [x] Views/Routes separadas para visualização ou roteamento — `src/views/routes.js`.
+- [x] Controllers concentram o fluxo da aplicação — src/controllers/lms-controller.js coordena as entradas e o serviço src/services/checkout.js mantém a unidade de trabalho.
+- [x] Error handling centralizado — src/domain/errors.js e middleware de src/app.js.
+- [x] Entry point claro — `src/server.js; composição em src/app.js / createApp()`; comandos no [README do projeto](../ecommerce-api-legacy/README.md).
+- [x] Aplicação inicia sem erros — servidor real iniciado pelo verificador em porta local e banco temporário; [log de boot/requests](../evidence/final-validation/server-project-2.log).
+- [x] Endpoints originais respondem corretamente — **3 pares método/caminho cobertos, 9/9 requests e 8/8 checks de payload/efeitos aprovados**, com as mudanças de segurança do plano; [resultado HTTP](../evidence/final-validation/http-project-2.json) e [log](../evidence/final-validation/http-run-project-2.log).
+
+Validação adicional: [cinco testes locais aprovados](../evidence/final-validation/unit-project-2.log). Todos os testes do repositório totalizam 15; o [resumo reproduzível](../evidence/final-validation/summary.json) também registra cinco verificações do seed e o HTTP dos três projetos. O verificador usa somente bancos descartáveis, gateway simulado e serviços locais.

@@ -12,7 +12,8 @@ def seed():
     password = os.environ.get('DEMO_PASSWORD')
     if not password or len(password) < 4: raise SystemExit('Set DEMO_PASSWORD with at least 4 characters')
     with app.app_context():
-        if db.session.scalar(select(User.id).limit(1)) is not None:
+        if any(db.session.scalar(select(model.id).limit(1)) is not None
+               for model in (User, Category, Task)):
             raise SystemExit('Database is not empty; no rows changed')
         user = User(name='Pessoa Demo', email='demo@example.test', role='user'); user.set_password(password)
         category = Category(name='Estudo', description='Exemplo local', color='#355C7D')

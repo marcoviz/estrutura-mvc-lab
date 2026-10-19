@@ -1,0 +1,68 @@
+{
+  "unit": [
+    {
+      "project": 1,
+      "passed": true,
+      "log": "unit-project-1.log"
+    },
+    {
+      "project": 2,
+      "passed": true,
+      "log": "unit-project-2.log"
+    },
+    {
+      "project": 3,
+      "passed": true,
+      "log": "unit-project-3.log"
+    }
+  ],
+  "seed": [
+    {
+      "case": "password required",
+      "passed": true
+    },
+    {
+      "case": "initial population",
+      "passed": true
+    },
+    {
+      "case": "repeat refuses without changes",
+      "passed": true
+    },
+    {
+      "case": "password hash verifies",
+      "passed": true
+    },
+    {
+      "case": "category-only database refuses without changes",
+      "passed": true
+    }
+  ],
+  "http": [
+    {
+      "project": 1,
+      "transport": "http",
+      "passed": 31,
+      "failed": 0,
+      "checks_passed": 20,
+      "checks_failed": 0
+    },
+    {
+      "project": 2,
+      "transport": "http",
+      "passed": 9,
+      "failed": 0,
+      "checks_passed": 8,
+      "checks_failed": 0
+    },
+    {
+      "project": 3,
+      "transport": "http",
+      "passed": 34,
+      "failed": 0,
+      "checks_passed": 20,
+      "checks_failed": 0
+    }
+  ],
+  "status": "passed"
+}

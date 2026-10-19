@@ -1,0 +1,248 @@
+{
+  "project": 2,
+  "refactored": true,
+  "transport": "http",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/checkout",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "msg",
+        "enrollment_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/checkout",
+      "status": 400,
+      "expected": 400,
+      "shape": "text",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/users/2",
+      "status": 200,
+      "expected": 200,
+      "shape": "text",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": "text",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "checkout contract",
+      "actual": {
+        "msg": "Sucesso"
+      },
+      "expected": {
+        "msg": "Sucesso"
+      },
+      "passed": true
+    },
+    {
+      "name": "checkout returns enrollment id",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "checkout retains course list",
+      "actual": [
+        "Arquitetura de Software",
+        "Containers"
+      ],
+      "expected": [
+        "Arquitetura de Software",
+        "Containers"
+      ],
+      "passed": true
+    },
+    {
+      "name": "paid checkout increases revenue",
+      "actual": 497,
+      "expected": 497,
+      "passed": true
+    },
+    {
+      "name": "paid checkout adds student",
+      "actual": [
+        {
+          "student": "Pessoa Teste",
+          "paid": 497
+        }
+      ],
+      "expected": [
+        {
+          "student": "Pessoa Teste",
+          "paid": 497
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "denied checkout leaves report unchanged",
+      "actual": [
+        {
+          "course": "Arquitetura de Software",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Pessoa Demo",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Containers",
+          "revenue": 497,
+          "students": [
+            {
+              "student": "Pessoa Teste",
+              "paid": 497
+            }
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "course": "Arquitetura de Software",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Pessoa Demo",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Containers",
+          "revenue": 497,
+          "students": [
+            {
+              "student": "Pessoa Teste",
+              "paid": 497
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "deleting checkout user removes payment and enrollment",
+      "actual": [
+        {
+          "course": "Arquitetura de Software",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Pessoa Demo",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Containers",
+          "revenue": 0,
+          "students": []
+        }
+      ],
+      "expected": [
+        {
+          "course": "Arquitetura de Software",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Pessoa Demo",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Containers",
+          "revenue": 0,
+          "students": []
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "deleting demo removes dependent rows",
+      "actual": [
+        [
+          0,
+          []
+        ],
+        [
+          0,
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          []
+        ],
+        [
+          0,
+          []
+        ]
+      ],
+      "passed": true
+    }
+  ],
+  "passed": 9,
+  "failed": 0,
+  "checks_passed": 8,
+  "checks_failed": 0
+}

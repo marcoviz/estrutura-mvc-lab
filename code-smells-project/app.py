@@ -12,6 +12,7 @@ from models.admin import AdminRepository
 from services.users import UserService
 from services.orders import OrderService
 from controllers.store import StoreController
+from controllers.admin import AdminController
 from views.routes import build_routes
 from views.admin import build_admin
 
@@ -27,7 +28,7 @@ def create_app(overrides=None):
         users, orders = Users(connection), Orders(connection)
         return StoreController(Products(connection), users, orders, UserService(users), OrderService(orders))
     application.register_blueprint(build_routes(controller))
-    application.register_blueprint(build_admin(lambda: AdminRepository(get_db())))
+    application.register_blueprint(build_admin(lambda: AdminController(AdminRepository(get_db()))))
     @application.errorhandler(DomainError)
     def domain_error(error): return {"erro":str(error), "sucesso":False}, error.status
     @application.errorhandler(HTTPException)
