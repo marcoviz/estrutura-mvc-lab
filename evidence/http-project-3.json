@@ -1,0 +1,290 @@
+{
+  "project": 3,
+  "refactored": true,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message",
+        "version"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "status",
+        "timestamp"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/categories",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/categories",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/users",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role",
+        "tasks"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message",
+        "token",
+        "user"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/tasks",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/search?q=Contrato&priority=2",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/stats",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "cancelled",
+        "completion_rate",
+        "done",
+        "in_progress",
+        "overdue",
+        "pending",
+        "total"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/tasks/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/users/1/tasks",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/reports/summary",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "generated_at",
+        "overdue",
+        "overview",
+        "recent_activity",
+        "tasks_by_priority",
+        "tasks_by_status",
+        "user_productivity"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/reports/user/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "statistics",
+        "user"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/categories/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name"
+      ],
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/tasks/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message"
+      ],
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/categories/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message"
+      ],
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "message"
+      ],
+      "passed": true
+    }
+  ],
+  "passed": 22,
+  "failed": 0
+}

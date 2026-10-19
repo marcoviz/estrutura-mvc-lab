@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refactor Arch"
+  short_description: "Auditoria e refatoração MVC com revisão prévia"
+  default_prompt: "Use $refactor-arch para auditar este backend e apresentar o relatório antes de refatorar."

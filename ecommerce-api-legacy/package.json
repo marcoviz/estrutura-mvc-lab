@@ -1,13 +1,17 @@
 {
-  "name": "desafio-arquitetura-ia-boilerplate",
+  "name": "estrutura-lms-api",
   "version": "1.0.0",
-  "description": "Boilerplate com código legado para refatoração",
+  "description": "LMS em MVC com checkout simulado e persist\u00eancia transacional",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node src/server.js",
+    "test": "node --test tests/*.test.js"
   },
   "dependencies": {
     "express": "^4.18.2",
     "sqlite3": "^5.1.6"
+  },
+  "allowScripts": {
+    "sqlite3@5.1.7": true
   }
 }

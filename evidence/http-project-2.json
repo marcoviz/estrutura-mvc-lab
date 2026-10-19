@@ -1,0 +1,35 @@
+{
+  "project": 2,
+  "refactored": true,
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/api/checkout",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "msg",
+        "enrollment_id"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "expected": 200,
+      "shape": "array",
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/users/1",
+      "status": 200,
+      "expected": 200,
+      "shape": "text",
+      "passed": true
+    }
+  ],
+  "passed": 3,
+  "failed": 0
+}

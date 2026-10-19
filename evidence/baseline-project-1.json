@@ -1,0 +1,240 @@
+{
+  "project": 1,
+  "refactored": false,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "endpoints",
+        "mensagem",
+        "versao"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "ambiente",
+        "counts",
+        "database",
+        "db_path",
+        "debug",
+        "secret_key",
+        "status",
+        "versao"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/busca?q=Notebook&preco_min=1&preco_max=99999",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso",
+        "total"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/produtos",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/11",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/produtos/11",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/usuarios",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios/4",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/pedidos",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/pedidos",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/pedidos/usuario/4",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/pedidos/1/status",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/relatorios/vendas",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/produtos",
+      "status": 201,
+      "expected": 201,
+      "shape": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/produtos/12",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/admin/query",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "dados",
+        "sucesso"
+      ],
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/admin/reset-db",
+      "status": 200,
+      "expected": 200,
+      "shape": [
+        "mensagem",
+        "sucesso"
+      ],
+      "passed": true
+    }
+  ],
+  "passed": 20,
+  "failed": 0
+}
